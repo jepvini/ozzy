@@ -1,0 +1,27 @@
+ignore-empty-password
+show-failed-attempts
+image=/home/leo/.local/imgs/swaylock/OOPSIE.png
+scaling=fill
+font=ComicShannsMono Nerd Font
+font-size=25
+indicator-radius=50
+indicator-thickness=5
+indicator-x-position=150
+indicator-y-position=150
+hide-keyboard-layout
+inside-color=#000000cc
+inside-clear-color=#000000cc
+inside-ver-color=#98cb6c
+inside-wrong-color=#e82424
+text-color=#cccccc
+text-clear-color=#e82424
+text-caps-lock-color=#e82424
+ring-color=#e82424
+ring-clear-color=#af5fd7
+ring-ver-color=#af5fd7
+ring-wrong-color=#e82424
+line-clear-color=#af5fd7
+line-ver-color=#af5fd7
+line-wrong-color=#e82424
+key-hl-color=#98cb6c
+line-uses-inside

@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+idle_status() {
+  swaymsg -t get_tree -r | grep -q "inhibit_idle.*true" && \
+    echo "CAFFEINE" || echo ""
+}
+
+idle_toggle() {
+  if [[ "$(inhibit-idle status)" != "CAFFEINE" ]]; then
+    swaymsg [all] inhibit_idle open
+  else
+    swaymsg [all] inhibit_idle none
+  fi
+}
+
+case "${1}" in
+  status)
+    idle_status
+    ;;
+  toggle)
+    idle_toggle
+    ;;
+  *)
+    echo "Usage: $(basename $0) [status|toggle]"
+    ;;
+esac

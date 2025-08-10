@@ -1,0 +1,272 @@
+$black: #1e1e2e;
+$red: #f38ba8;
+$green: #a6e3a1;
+$yellow: #f9e2af;
+$blue: #89b4fa;
+$magenta: #cba6f7;
+$cyan: #74c7ec;
+$white: #b4befe;
+$black_b: #6c7086;
+$red_b: #fab382;
+$green_b: #94e2d5;
+$yellow_b: #f2cdcd;
+$blue_b: #89dceb;
+$magenta_b: #f5c2e7;
+$cyan_b: #94e3d5;
+$white_b: #e4e4e4;
+
+/* $black: #000000; */
+/* $red: #d34043; */
+/* $green: #a6e3a1; */
+/* $yellow: #f9e2af; */
+/* $blue: #89b4fa; */
+/* $magenta: #cba6f7; */
+/* $cyan: #74c7ec; */
+/* $white: #bac2de; */
+/* $black_b: #6c7086; */
+/* $red_b: #e82424; */
+/* $green_b: #98cb6c; */
+/* $yellow_b: #e6c984; */
+/* $blue_b: #89dceb; */
+/* $magenta_b: #af5fd7; */
+/* $cyan_b: #94e2d5; */
+/* $white_b: #cccccc; */
+
+$foreground: #cdd6f4;
+$background: rgba(9%, 9%, 15%, 0.69);
+$background_light: rgba(9%, 9%, 15%, 0.00);
+$transparent: transparent;
+
+
+* {
+  all: unset;
+  /* font-size: 19px; */
+}
+
+.run-cat {
+  font-family: "jepfont";
+  font-size: 30px;
+  margin: 0px 0px 6px 0px;
+  color: $foreground;
+}
+
+.text {
+  font-family: "ComicShannsMono Nerd Font Mono";
+  color: $foreground;
+  font-size: 17px;
+}
+
+
+.icon {
+  font-family: "icomoon-feather";
+  padding: 0px 8px;
+  font-size: 15px;
+  margin: 0px 0px 4px 0px;
+}
+
+.single-icon {
+  font-size: 19px;
+}
+
+.expand {
+  margin: 4px 8px 5px 0px;
+  border-radius: 8px;
+}
+
+/* window { */
+  /* background-color: $background; */
+  /* background-color: $transparent; */
+  /* border-radius: 14; */
+/* } */
+
+.right_modules {
+  border: 2px;
+  /* border-style: solid; */
+  color: $white;
+  background-color: $background_light;
+  border-radius: 14px;
+}
+
+.left_modules {
+  border: 2px;
+  border-style: solid;
+  color: $white;
+  background-color: $background;
+  border-radius: 14px;
+}
+
+.left {
+  margin: 2px 6px 2px 4px;
+  border-radius: 14px;
+  .icon {
+    color: $magenta_b;
+  }
+}
+
+.right {
+  margin: 0px 0px 0px 10px;
+}
+
+.focused {
+  color: $green_b
+}
+
+.visible {
+  color: $yellow_b
+}
+
+.eDP {
+  color: $blue;
+}
+
+.HDMI {
+  color: $magenta_b;
+}
+
+.workspace {
+  .icon {
+    font-size: 14px;
+    padding: 1px 4px 0px 0px;
+    color: $green;
+    /* margin: 0px; */
+  }
+  .text {
+    font-weight: bold;
+    color: $white_b;
+  }
+}
+
+.caffeine {
+  .icon {
+    color: $cyan_b;
+    font-size: 16px;
+    padding: 0px;
+    margin: 0px;
+    /* padding: 0px 4px 0px 4px; */
+    /* margin: 0px 0px 2px 0px; */
+  }
+  .on {
+    padding: 0px 4px 0px 8px;
+    margin: 0px 0px 2px 0px;
+  }
+}
+
+.dunst {
+  .icon {
+    color: $cyan_b;
+    /* font-size: 16px; */
+    padding: 0px;
+    margin: 0px;
+    /* padding: 0px 4px 0px 4px; */
+    /* margin: 0px 0px 2px 0px; */
+  }
+  .on {
+    padding: 0px 14px 0px 0px;
+    margin: 0px 0px 2px 0px;
+  }
+}
+
+.wifi {
+  .icon {
+    padding: 0px 0px 0px 0px;
+  }
+  .icon.connected {
+    color: $green_b;
+  }
+  .expand {
+    padding: 0px 10px 0px 10px;
+    background-color: $green_b;
+  }
+  .text {
+    color: $black;
+  }
+}
+
+.mic {
+  .icon.muted {
+    color: $red;
+  }
+  .icon {
+    font-size: 14px;
+  }
+  .icon.running {
+    color: $green;
+  }
+}
+
+.speakers {
+  .icon {
+    font-size: 18px;
+    padding: 2px 4px 0px 0px;
+  }
+  .icon.muted {
+    color: $red;
+  }
+  .expand {
+    padding: 4px 10px 0px 10px;
+    background-color: $magenta_b;
+  }
+  .text {
+    color: $black;
+  }
+}
+
+.temp {
+  .text {
+    color: $blue;
+  }
+  .icon {
+    color: $blue
+  }
+  .icon.critical {
+    color: $red_b
+  }
+}
+
+.watt {
+  .text {
+    color: $yellow_b;
+  }
+  .icon {
+    color: $yellow_b;
+    padding: 2px 8px 0px 8px;
+  }
+  .expand {
+    padding: 2px 0px 0px 0px;
+    background-color: $yellow_b;
+  }
+  .button {
+    color: $black;
+  }
+}
+
+.battery {
+  .icon {
+    padding: 2px 8px 0px 8px;
+  }
+  .icon.critical {
+    color: $red;
+  }
+}
+
+.date {
+    padding: 0px 6px 0px 0px;
+}
+
+.time {
+    padding: 0px 10px 0px 12px;
+    /* margin: 6px 4px 6px 0px; */
+    margin: 0px;
+    .text {
+      font-weight: bold;
+      color: $foreground;
+    }
+    background-color: $background;
+    border-radius: 12px;
+}
+
+.tray image {
+  margin: 0px 0px 2px 0px;
+  padding: 0px 0px 0px 6px;
+  -gtk-icon-transform: scale(0.5);
+}

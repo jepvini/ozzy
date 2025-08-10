@@ -1,0 +1,283 @@
+include /etc/sway/config.d/*
+
+# font
+font ComicShannsMono Nerd Font 10
+
+# border & title
+default_border pixel 2
+default_floating_border pixel 4
+
+# for_window [title="^.*"] title_format ""
+# for_window [class="^.*"] border pixel 1, title_format ""
+for_window [window_type="dialog"] floating enable
+for_window [window_role="dialog"] floating enable
+for_window [title="Extension:*"] floating enable
+for_window [shell="xwayland"] title_format "[XWayland] %title"
+# gaps
+
+gaps inner 4
+gaps outer 0
+# smart_gaps on
+
+# hide_edge_borders smart_no_gaps
+# smart_borders on
+
+
+# colors
+
+include catpuccin-mocha
+
+# target                 title     bg    text   indicator  border
+client.focused           $lavender $base $text  $rosewater $lavender
+client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
+client.unfocused         $overlay0 $base $text  $rosewater $overlay0
+client.urgent            $peach    $base $peach $overlay0  $peach
+client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
+client.background        $base
+
+
+# set
+set $main #af5fd7
+# set $main #666666
+set $inactive #e6c984
+set $fg #e4e4e4
+set $bg #000000
+set $urgent #e82424
+set $transparent rgba(0,0,0,0)
+
+# # class                 border  backgr. text    indicator child_border
+# client.focused          $main     $main      $bg      $main     $main
+# client.focused_inactive $inactive $inactive  $fg      $inactive $inactive
+# client.unfocused        $bg       $bg        $fg      $bg       $bg
+# client.urgent           $urgent   $urgent    $urgent  $urgent   $urgent
+
+# swayfx
+
+# blur
+blur enable
+blur_xray disable
+blur_passes 2
+blur_radius 5
+
+# shadows
+shadows disable
+shadow_blur_radius 20
+
+# radius
+smart_corner_radius on
+corner_radius 14
+
+# inactive
+
+default_dim_inactive 0.1
+
+# eww
+layer_effects "gtk-layer-shell" shadows disable; corner_radius 14; blur disable
+layer_effects "notifications" shadows disable; corner_radius 14; blur enable
+
+# swaymsg -r -t get_outputs | jq '.[0].layer_shell_surfaces | .[] | .namespace'
+
+# keyboard layout
+input * {
+  xkb_layout us
+    accel_profile flat
+    tap enabled
+# natural_scroll enabled
+}
+
+seat seat0 xcursor_theme Bibata-Modern-Ice 24
+# seat seat0 xcursor_theme Banana 32
+
+
+# displays
+set $laptop eDP-1
+bindswitch lid:on output $laptop disable
+bindswitch lid:off output $laptop enable
+
+# focus doesn't follow mouse pointer
+focus_follows_mouse no
+
+# firefox in the scratchpad
+# exec /home/leo/.config/sway/firefox.sh
+
+### Variables
+#
+# Logo key. Use mod1 for Alt.
+set $mod mod4
+set $alt mod1
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+
+# Your preferred terminal emulator
+set $term wezterm
+# Your preferred browser
+set $browser firefox
+# Your preferred filemanager
+set $filemanager thunar
+# Your preferred application launcher
+set $menu ~/.local/bin/rofi_run
+set $power ~/.local/bin/rofi_logout
+
+##
+
+# assign workspaces
+# assign [title=""] workspace 10
+
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+output eDP-1 pos 0 0 res 2880x1920 bg ~/.local/imgs/set-wallpaper/corvette.png fill
+# output HDMI-A-2 pos 0 0 res 1920x1080 bg /home/leo/.local/imgs/set-wallpaper/akira.jpg fill
+# exec set-wallpaper
+
+### Idle configuration
+
+bindsym $mod+Shift+o exec swaymsg "output eDP-1 disable"
+bindsym $mod+Shift+i exec swaymsg "output eDP-1 enable"
+bindsym $mod+m exec swaymsg "output eDP-1 enable" && swaylock
+
+# swayidle
+
+bindsym $mod+u exec inhibit-idle toggle
+
+exec swayidle -w \
+       timeout 300 'swaylock -f -c 000000' \
+       timeout 600 'swaymsg "output * dpms off" && kb-light-off' \
+       resume 'swaymsg "output * dpms on"  && swaymsg "output eDP-1 enable" && sleep 1 && reload' \
+       before-sleep 'swaylock -f -c 000000 && swaymsg "output eDP-1 enable"'
+
+### Key bindings
+#
+# Basics:
+#
+# Start a terminal
+       bindsym $mod+Return exec $term
+       bindsym $mod+t exec $term
+
+# Start a browser
+       bindsym $mod+c exec $browser
+
+# Start a filemanager
+       bindsym $mod+f exec $filemanager
+
+# Kill focused window
+       bindsym $mod+q kill
+       bindsym $alt+q kill
+
+# Start your launcher
+       bindsym $mod+space exec $menu
+
+# Start your logout-commands
+       bindsym $mod+x exec $power
+
+# Reload all
+       bindsym $mod+Shift+c exec ~/.local/bin/reload
+
+# Moving around:
+#
+# Move your focus around
+       bindsym $mod+$left   focus left
+       bindsym $mod+$right  focus right
+# One hand
+       bindsym $mod+a       focus left
+       bindsym $mod+d       focus right
+
+# Move the focused window with the same, but add Shift
+       bindsym $mod+Shift+$left   move left
+       bindsym $mod+Shift+$right  move right
+
+# Workspaces:
+
+# switch to next or previous workspace
+       bindsym $alt+$left   workspace prev
+       bindsym $alt+$right  workspace next
+
+# One hand
+       bindsym $alt+a       workspace prev
+       bindsym $alt+d       workspace next
+
+# Switch to workspace
+       bindsym $mod+1 workspace number 1
+       bindsym $mod+2 workspace number 2
+       bindsym $mod+3 workspace number 3
+       bindsym $mod+4 workspace number 4
+       bindsym $mod+5 workspace number 5
+       bindsym $mod+6 workspace number 6
+       bindsym $mod+7 workspace number 7
+       bindsym $mod+8 workspace number 8
+       bindsym $mod+9 workspace number 9
+
+# Move focused container to workspace
+       bindsym $alt+1 move container to workspace number 1; workspace number 1
+       bindsym $alt+2 move container to workspace number 2; workspace number 2
+       bindsym $alt+3 move container to workspace number 3; workspace number 3
+       bindsym $alt+4 move container to workspace number 4; workspace number 4
+       bindsym $alt+5 move container to workspace number 5; workspace number 5
+       bindsym $alt+6 move container to workspace number 6; workspace number 6
+       bindsym $alt+7 move container to workspace number 7; workspace number 7
+       bindsym $alt+8 move container to workspace number 8; workspace number 8
+       bindsym $alt+9 move container to workspace number 9; workspace number 9
+
+
+# Move focus fo output up/down
+       bindsym $mod+$up focus output up
+       bindsym $mod+$down focus output down
+
+# Move to output
+       bindsym $mod+Shift+$up  move container to output up; focus output up
+       bindsym $mod+Shift+$down  move container to output down; focus output down
+
+# Layout stuff:
+
+# Make the current focus fullscreen
+       bindsym $mod+g fullscreen
+
+# Scratchpad:
+#
+# Sway has a "scratchpad", which is a bag of holding for windows.
+       bindsym $alt+Shift+u   move scratchpad
+       bindsym $alt+Shift+i   scratchpad show
+
+# Floating
+       bindsym $alt+Shift+space   floating toggle
+       bindsym $alt+Shift+$down   move down
+       bindsym $alt+Shift+$up     move up
+       bindsym $alt+Shift+$right  move right
+       bindsym $alt+Shift+$left   move left
+
+
+# layout toggle, keycode 23 is Tab
+       bindsym $mod+b  layout toggle tabbed split
+       bindsym $mod+v  layout toggle splitv splith
+
+# Size
+       bindsym $alt+$up     resize grow   width  100 px or 2 ppt
+       bindsym $alt+$down   resize shrink width  100 px or 2 ppt
+
+# Backlight
+       bindsym XF86MonBrightnessDown  exec --no-startup-id brightnessctl s 5-%
+       bindsym XF86MonBrightnessUp    exec --no-startup-id brightnessctl s +5%
+
+# Pamixer
+       bindsym XF86AudioMute        exec --no-startup-id pamixer -t
+       bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5
+       bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5
+       bindsym XF86AudioMicMute     exec --no-startup-id pamixer --default-source -t
+
+
+# Screenshot
+       bindsym Print exec grim
+
+# Status Bar:
+
+       exec reload
+       exec /home/leo/.setup/dotfiles/eww/runcat/cpu-stats.sh
+
+# notifications
+       exec dunst
+       bindsym $mod+i exec dunstctl set-paused toggle
+       bindsym $mod+o exec dunstctl close-all
+       bindsym $mod+p exec dunstctl history-pop

@@ -1,0 +1,60 @@
+/* RASI Theme */
+/* sexy-rick */
+
+* {
+	background:                     #1e1e2e;
+	bordercolor:                    #b4befe;
+	separatorcolor:                 transparent;
+	normal-background:              transparent;
+	normal-foreground:              #a6e3a1;
+	selected-background:            #b4b3f3;
+	selected-foreground:            #1e1e2e;
+	foreground:                     @normal-foreground;
+}
+
+* {
+    spacing:    2;
+    border-color: @background;
+    background-color: transparent;
+    font: "ComicShannsMono Nerd Font 13";
+}
+#window {
+    width:      600px;
+    height:     400;
+    border:     2;
+    padding:    5;
+    border-radius: 14;
+    background-color: @background;
+    background-image: url("/home/leo/.local/imgs/rofi/sexy_rick.jpg", both);
+    border-color: @bordercolor;
+}
+#listview {
+    border-color: @separatorcolor;
+}
+#listview {
+    fixed-height: 0;
+    border:       2px dash 0px 0px ;
+    padding:      2px 0px 0px ;
+}
+#element {
+    border-radius: 8;
+    padding: 4;
+    border: 0;
+}
+#element-text {
+    text-color: inherit;
+}
+#element {
+    text-color: @normal-foreground;
+}
+#element selected {
+    text-color:         @selected-foreground;
+    background-color:   @selected-background;
+}
+#inputbar, case-indicator, entry, prompt, button {
+    border-radius: 8;
+    padding: 2;
+    spacing: 1;
+    text-color:         @normal-foreground;
+    background-color:   @background;
+}

@@ -1,0 +1,27 @@
+Host ilmatar
+    Hostname ilmatar.tailcae57.ts.net
+    Port     22
+    IdentityFIle ~/.ssh/ilmatar
+
+Host mojo
+    User volumio
+    Hostname mojo.tailcae57.ts.net
+    Port     22
+    IdentityFIle ~/.ssh/mojo
+
+Host github.com
+    User git
+    Hostname github.com
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/github
+
+Host gitlab.poul.org
+    User git
+    Hostname gitlab.poul.org
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/poul-gitlab
+
+Host boh
+    User poul
+    Hostname boh
+    IdentityFile ~/.ssh/boh

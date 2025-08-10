@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+echo "$1"
+if [[ $1 == *.cpp ]]; then
+  g++ "$1" -Wall -O2 -lm -pthread
+elif [[ $1 == *.c ]]; then
+  gcc "$1" -Wall -O2 -lm -pthread
+fi
+
+./a.out "${@:2}"
+
+rm a.out

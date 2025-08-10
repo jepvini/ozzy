@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# simple bash script to convert markdown files to pdf using pandoc
+
+if [ $# -ne 1 ]; then
+  echo "pass the md file as argument"
+  exit
+fi
+
+out=${1//.md/.pdf}
+
+pandoc --pdf-engine=pdfroff --output="$out" "$1"
+
+read -p "do you want to open the file? [Y]/n" -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]] || [ -z "$REPLY" ];
+then
+  okular "$out"
+fi

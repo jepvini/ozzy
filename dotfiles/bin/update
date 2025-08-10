@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+echo "coping config..."
+
+~/.setup/setup.sh
+
+pushd ~/.setup
+git status
+popd

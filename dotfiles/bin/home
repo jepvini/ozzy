@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ "$(tailscale status)" != "Tailscale is stopped." ]; then
+  sudo tailscale down
+fi
+
+sudo tailscale switch jepvini@github
+sudo tailscale up --accept-routes
+tailscale status

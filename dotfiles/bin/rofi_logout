@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+question=$(echo "lock|suspend|hibernate|logout|reboot|poweroff" | rofi -sep "|" \
+    -dmenu -i -p 'System' -lines 1 -width 1 -color-enabled)
+
+case $question in
+    *lock)
+        lock
+        ;;
+    *logout)
+        swaymsg 'exit'
+        ;;
+    *reboot)
+        reboot
+        ;;
+    *suspend)
+        swaymsg "output eDP-1 enable" && systemctl suspend
+        ;;
+    *hibernate)
+        swaymsg "output eDP-1 enable" && systemctl hibernate
+        ;;
+    *poweroff)
+        poweroff
+        ;;
+    *)
+        exit 0  # do nothing on wrong response
+        ;;
+esac

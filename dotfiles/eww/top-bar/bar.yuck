@@ -1,0 +1,193 @@
+; eww config
+
+; Variables
+
+(deflisten caffeine :initial " " "./top-bar/modules/inhibit-status.sh")
+(deflisten dunst :initial " " "./top-bar/modules/dunst-checker.sh")
+(deflisten governor :initial "error" "./top-bar/modules/governor-checker.sh")
+(deflisten mic :initial 0  "./top-bar/modules/listen-mic.sh")
+(deflisten run-cat :initial "󠀰" "./top-bar/runcat/runcat.sh")
+(deflisten speakers :initial '{ "volume": 0, "muted": "false" }' "./top-bar/modules/listen-volume.sh")
+(deflisten watt :initial "0 0" "./top-bar/modules/watt.sh")
+(deflisten wifi :initial "0" "./top-bar/modules/wifi.sh")
+(deflisten workspaces :initial '' "./top-bar/modules/sway-workspaces.py")
+(deflisten date_poll :initial "00/00" "./top-bar/modules/date.sh")
+(deflisten time_poll :initial "00:00" "./top-bar/modules/time.sh")
+(defvar eww "$HOME/.local/bin/eww -c $HOME/.config/eww")
+(defvar governor_rev false)
+(defvar music_rev false)
+(defvar speackers_rev false)
+(defvar wifi_rev false)
+
+; Windows
+(defwindow eDP  :monitor 0
+               :geometry (geometry :x "0px" :y "4px" :height "15px" :width "1432px" :anchor "center top")
+               :stacking "fg"
+               :exclusive true
+               :focusable false
+  (bar)
+)
+(defwindow HDMI :monitor 1
+               :geometry (geometry :x "0%" :y "0%" :height "10px" :width "100%" :anchor "center top")
+               :stacking "fg"
+               :exclusive true
+               :focusable false
+  (bar)
+)
+(defwindow DP   :monitor 2
+               :geometry (geometry :x "0%" :y "0%" :height "15px" :width "100%" :anchor "center top")
+               :stacking "fg"
+               :exclusive true
+               :focusable false
+  (bar)
+)
+
+; Bars
+(defwidget right []
+  (box :class "right_modules" :orientation "h" :space-evenly false :halign "start"
+    (workspaces)
+    (caffeine)
+    (dunst)
+  )
+)
+
+(defwidget left []
+  (box :class "left_modules" :orientation "h" :space-evenly false :halign "end"
+    (tray)
+    (wifi)
+    (mic)
+    (speakers)
+    (run-cat)
+    (temp)
+    (watt)
+    (battery)
+    (date)
+    (time)
+  )
+)
+
+(defwidget bar []
+  (box :class "bar" :orientation "h"
+    (right)
+    (left)
+  )
+)
+
+;
+; Widgets
+;
+
+; Workspace
+(defwidget workspaces []
+  (box :orientation "h" :class "workspaces"
+    (for wsp in {workspaces}
+      (button :class "right workspace ${wsp.class}" :onclick "swaymsg workspace ${wsp.name}"
+        (box
+          (label :class "text" :text "${wsp.name}")
+          (label :class "icon" :text "${wsp.icon}")
+)))))
+
+; Tray
+(defwidget tray []
+  (box :class "left tray"
+    (systray)
+))
+
+; Wifi
+(defwidget wifi []
+  (eventbox :onhover "${eww} update wifi_rev=true" :onhoverlost "${eww} update wifi_rev=false"
+    (box :class "left wifi" :vexpand "false" :hexpand "false" :space-evenly "false"
+      (revealer :transition "slideleft" :reveal wifi_rev :duration "500ms"
+        (label :class "expand text" :text "${wifi == 0 ? 'Disconnected' : wifi}")
+      )
+    (label :class "icon ${wifi == 0 ? 'disconnected' : 'connected'} " :text "${wifi == 0 ? '' : '' }")
+)))
+
+; Mic
+(defwidget mic []
+  (box :class "mic" :space-evenly false
+    (button :class "left mic" :onclick "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+      ; 0: muted, 1: unmuted, 2: running
+      (label :class "icon single-icon ${mic == 2 ? 'running' : mic == 0 ? 'muted' : ''}" :text "${mic == 0 ? '' :  '' }")
+)))
+
+
+; Volume
+(defwidget speakers []
+  (eventbox :onhover "${eww} update speackers_rev=true" :onhoverlost "${eww} update speackers_rev=false"
+    (box :class "left speakers" :vexpand "false" :hexpand "false" :space-evenly "false"
+      (revealer :transition "slideleft" :reveal speackers_rev :duration "500ms"
+        (label :class "expand text" :text "${ speakers.volume }%")
+      )
+      (button :class "icon single-icon  ${ speakers.volume > 100 ? 'over' : '' } ${ speakers.muted ? 'muted' : '' }"
+              :onclick "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+        (label :text "${  speakers.muted ? '' :
+                          speakers.volume > 70 ? '' :
+                          speakers.volume > 35 ? '' :
+                          '' }")
+))))
+
+; Cpu-Temp
+(defwidget temp []
+  (box :class "left temp"
+    :space-evenly false
+    (label :class "icon ${ EWW_TEMPS.ACPITZ_TEMP1 > 75 ? 'critical' : '' }" :text "")
+    (label :class "text" :text "${ EWW_TEMPS.ACPITZ_TEMP1 }°C" :halign "center" :xalign 0.5 :justify "right")
+))
+
+; Cpu-Watt
+(defwidget watt []
+  (eventbox :onhover "${eww} update governor_rev=true" :onhoverlost "${eww} update governor_rev=false"
+    (box :class "left watt" :vexpand "false" :hexpand "false" :space-evenly "false"
+      (label :class "icon" :text "${governor}")
+      (revealer :transition "slideleft" :reveal governor_rev :duration "500ms"
+        (box :class "expand" :vexpand "false" :hexpand "false" :space-evenly "false"
+          (button :class "button icon" :timeout "5s" :onclick "sudo tlp bat" "")
+          ;; (button :class "button icon" :timeout "5s" :onclick "tuned-adm profile balanced" "")
+          (button :class "button icon" :timeout "5s" :onclick "sudo tlp ac" "")
+        )
+      )
+      (label :class "text" :text "${watt}" :halign "center" :xalign 0.5 :justify "right")
+)))
+
+; Battery
+(defwidget battery []
+  (box :class "left battery" :space-evenly false
+    (label :class "icon ${ EWW_BATTERY["BAT1"].capacity <= 10 ? 'critical' : '' }"
+           :text "${  EWW_BATTERY["BAT1"].status == "Charging" ? '' : '' }")
+    (label :class "text" :text "${EWW_BATTERY["BAT1"].capacity}" :halign "center" :xalign 0.5 :justify "right")
+))
+
+; Date
+(defwidget date []
+  (box :class "left date" :space-evenly false
+    (label :class "icon" :text "")
+    (label :class "text" :text date_poll)
+))
+
+; Time
+(defwidget time []
+  (box :class "left time" :space-evenly false
+    (label :class "text" :text time_poll)
+))
+
+
+; Run-Cat
+(defwidget run-cat []
+  (box :class "left run-cat"
+    (label :class "run-cat" :text "${run-cat}")
+  )
+)
+
+
+; Caffeine
+(defwidget caffeine []
+  (box :class "right caffeine" :space-evenly false
+    (label :class "icon ${caffeine == ""  ? 'on' : '' }" :text "${caffeine}")
+))
+
+; Dunst
+(defwidget dunst []
+  (box :class "right dunst" :space-evenly false
+    (label :class "icon ${dunst == ""  ? 'on' : '' }" :text "${dunst}")
+))
