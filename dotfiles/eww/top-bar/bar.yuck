@@ -5,7 +5,6 @@
 (deflisten caffeine :initial " " "./top-bar/modules/inhibit-status.sh")
 (deflisten dunst :initial " " "./top-bar/modules/dunst-checker.sh")
 (deflisten governor :initial "error" "./top-bar/modules/governor-checker.sh")
-(deflisten mic :initial 0  "./top-bar/modules/listen-mic.sh")
 (deflisten run-cat :initial "󠀰" "./top-bar/runcat/runcat.sh")
 (deflisten speakers :initial '{ "volume": 0, "muted": "false" }' "./top-bar/modules/listen-volume.sh")
 (deflisten watt :initial "0 0" "./top-bar/modules/watt.sh")
@@ -21,7 +20,7 @@
 
 ; Windows
 (defwindow eDP  :monitor 0
-               :geometry (geometry :x "0px" :y "4px" :height "15px" :width "1432px" :anchor "center top")
+               :geometry (geometry :x "0px" :y "4px" :height "36px" :width "1432px" :anchor "center top")
                :stacking "fg"
                :exclusive true
                :focusable false
@@ -53,9 +52,8 @@
 
 (defwidget left []
   (box :class "left_modules" :orientation "h" :space-evenly false :halign "end"
-    (tray)
+    ;; (tray)
     (wifi)
-    (mic)
     (speakers)
     (run-cat)
     (temp)
@@ -84,7 +82,7 @@
       (button :class "right workspace ${wsp.class}" :onclick "swaymsg workspace ${wsp.name}"
         (box
           (label :class "text" :text "${wsp.name}")
-          (label :class "icon" :text "${wsp.icon}")
+          ;; (label :class "icon" :text "${wsp.icon}")
 )))))
 
 ; Tray
@@ -103,15 +101,6 @@
     (label :class "icon ${wifi == 0 ? 'disconnected' : 'connected'} " :text "${wifi == 0 ? '' : '' }")
 )))
 
-; Mic
-(defwidget mic []
-  (box :class "mic" :space-evenly false
-    (button :class "left mic" :onclick "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
-      ; 0: muted, 1: unmuted, 2: running
-      (label :class "icon single-icon ${mic == 2 ? 'running' : mic == 0 ? 'muted' : ''}" :text "${mic == 0 ? '' :  '' }")
-)))
-
-
 ; Volume
 (defwidget speakers []
   (eventbox :onhover "${eww} update speackers_rev=true" :onhoverlost "${eww} update speackers_rev=false"
@@ -119,7 +108,7 @@
       (revealer :transition "slideleft" :reveal speackers_rev :duration "500ms"
         (label :class "expand text" :text "${ speakers.volume }%")
       )
-      (button :class "icon single-icon  ${ speakers.volume > 100 ? 'over' : '' } ${ speakers.muted ? 'muted' : '' }"
+      (button :class "icon ${ speakers.volume > 100 ? 'over' : '' } ${ speakers.muted ? 'muted' : '' }"
               :onclick "pactl set-sink-mute @DEFAULT_SINK@ toggle"
         (label :text "${  speakers.muted ? '' :
                           speakers.volume > 70 ? '' :

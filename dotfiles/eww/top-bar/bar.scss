@@ -34,7 +34,7 @@ $white_b: #e4e4e4;
 
 $foreground: #cdd6f4;
 $background: rgba(9%, 9%, 15%, 0.69);
-$background_light: rgba(9%, 9%, 15%, 0.00);
+$background_light: rgba(0%, 0%, 0%, 0.40);
 $transparent: transparent;
 
 
@@ -43,12 +43,6 @@ $transparent: transparent;
   /* font-size: 19px; */
 }
 
-.run-cat {
-  font-family: "jepfont";
-  font-size: 30px;
-  margin: 0px 0px 6px 0px;
-  color: $foreground;
-}
 
 .text {
   font-family: "ComicShannsMono Nerd Font Mono";
@@ -59,31 +53,18 @@ $transparent: transparent;
 
 .icon {
   font-family: "icomoon-feather";
-  padding: 0px 8px;
-  font-size: 15px;
-  margin: 0px 0px 4px 0px;
-}
-
-.single-icon {
-  font-size: 19px;
 }
 
 .expand {
-  margin: 4px 8px 5px 0px;
   border-radius: 8px;
 }
 
-/* window { */
-  /* background-color: $background; */
-  /* background-color: $transparent; */
-  /* border-radius: 14; */
-/* } */
-
 .right_modules {
+  padding: 0px 0px 0px 6px;
   border: 2px;
   /* border-style: solid; */
   color: $white;
-  background-color: $background_light;
+  background-color: $transparent;
   border-radius: 14px;
 }
 
@@ -91,28 +72,59 @@ $transparent: transparent;
   border: 2px;
   border-style: solid;
   color: $white;
-  background-color: $background;
+  /* background-color: $black; */
+  background-image: url("/home/leo/.local/imgs/eww/hollow.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
   border-radius: 14px;
 }
 
+.right {
+}
+
 .left {
-  margin: 2px 6px 2px 4px;
   border-radius: 14px;
   .icon {
     color: $magenta_b;
   }
 }
 
-.right {
-  margin: 0px 0px 0px 10px;
+.workspace {
+  .icon {
+    font-size: 15px;
+    color: $background;
+    border-radius: 20px;
+    background-color: $blue;
+    padding: 0px 4px 0px 4px;
+    margin: 6px 0px 8px 0px;
+  }
+  .text {
+    font-weight: bold;
+    /* color: $white_b; */
+    color: $white_b;
+  }
 }
 
 .focused {
-  color: $green_b
+  /* .icon { */
+  /*   color: $background; */
+  /*   border-radius: 20px; */
+  /*   background-color: $green; */
+  /*   padding: 0px 4px 0px 4px; */
+  /*   margin: 6px 0px 8px 0px; */
+  /* } */
+  .text {
+    color: $background;
+    border-radius: 20px;
+    background-color: $green;
+    padding: 0px 8px 0px 8px;
+    margin: 6px 0px 6px 0px;
+  }
 }
 
 .visible {
-  color: $yellow_b
+  color: $yellow_b;
 }
 
 .eDP {
@@ -123,100 +135,98 @@ $transparent: transparent;
   color: $magenta_b;
 }
 
-.workspace {
-  .icon {
-    font-size: 14px;
-    padding: 1px 4px 0px 0px;
-    color: $green;
-    /* margin: 0px; */
-  }
-  .text {
-    font-weight: bold;
-    color: $white_b;
-  }
-}
 
 .caffeine {
   .icon {
-    color: $cyan_b;
-    font-size: 16px;
-    padding: 0px;
+    font-size: 17px;
+    padding:0px;
     margin: 0px;
-    /* padding: 0px 4px 0px 4px; */
-    /* margin: 0px 0px 2px 0px; */
   }
   .on {
-    padding: 0px 4px 0px 8px;
-    margin: 0px 0px 2px 0px;
+    color: $background;
+    padding: 0px 4px 0px 4px;
+    margin: 6px 0px 6px 8px;
+    border-radius: 20px;
+    background-color: $cyan;
   }
 }
 
 .dunst {
   .icon {
-    color: $cyan_b;
-    /* font-size: 16px; */
+    font-size: 14px;
     padding: 0px;
     margin: 0px;
-    /* padding: 0px 4px 0px 4px; */
-    /* margin: 0px 0px 2px 0px; */
   }
   .on {
-    padding: 0px 14px 0px 0px;
-    margin: 0px 0px 2px 0px;
+    color: $background;
+    padding: 0px 5px 0px 5px;
+    margin: 7px 0px 7px 8px;
+    border-radius: 20px;
+    background-color: $magenta_b;
   }
 }
 
 .wifi {
   .icon {
+    color: $red;
+    font-size: 15px;
+    margin: 0px 10px 2px 12px;
     padding: 0px 0px 0px 0px;
   }
   .icon.connected {
-    color: $green_b;
+    color: $green;
   }
   .expand {
-    padding: 0px 10px 0px 10px;
-    background-color: $green_b;
+    margin: 4px 0px 4px 4px;
+    padding: 2px 4px 0px 4px;
+    background-color: $green;
+    font-weight: bold;
+    
   }
   .text {
     color: $black;
-  }
-}
-
-.mic {
-  .icon.muted {
-    color: $red;
-  }
-  .icon {
-    font-size: 14px;
-  }
-  .icon.running {
-    color: $green;
   }
 }
 
 .speakers {
   .icon {
-    font-size: 18px;
-    padding: 2px 4px 0px 0px;
+    color: $green;
+    margin: 2px 10px 2px 8px;
+    padding: 0px 0px 0px 0px;
+    font-size: 19px;
   }
   .icon.muted {
     color: $red;
   }
   .expand {
-    padding: 4px 10px 0px 10px;
-    background-color: $magenta_b;
+    margin: 4px 0px 4px 4px;
+    padding: 2px 4px 0px 4px;
+    background-color: $green;
+    font-weight: bold;
   }
   .text {
     color: $black;
   }
 }
 
+.run-cat {
+  font-family: "jepfont";
+  font-size: 28px;
+  margin: 0px 2px 0px 2px;
+  padding: 0px 4px 2px 0px;
+  color: $magenta;
+}
+
 .temp {
+  margin: 0px 10px 0px 0px;
   .text {
-    color: $blue;
+    color: $blue_b;
   }
   .icon {
-    color: $blue
+    font-size: 16px;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 2px 2px;
+    color: $blue_b
   }
   .icon.critical {
     color: $red_b
@@ -224,16 +234,20 @@ $transparent: transparent;
 }
 
 .watt {
+  margin: 0px 10px 0px 0px;
   .text {
-    color: $yellow_b;
+    color: $yellow;
   }
   .icon {
-    color: $yellow_b;
-    padding: 2px 8px 0px 8px;
+    font-size: 16px;
+    margin: 0px 4px 0px 4px;
+    padding: 0px 0px 0px 0px;
+    color: $yellow;
   }
   .expand {
-    padding: 2px 0px 0px 0px;
-    background-color: $yellow_b;
+    margin: 4px 4px 4px 4px;
+    padding: 0px 4px 0px 4px;
+    background-color: $yellow;
   }
   .button {
     color: $black;
@@ -241,8 +255,12 @@ $transparent: transparent;
 }
 
 .battery {
+  margin: 0px 10px 0px 0px;
   .icon {
-    padding: 2px 8px 0px 8px;
+    color: $red_b;
+    font-size: 18px;
+    margin: 0px 4px 2px 4px;
+    padding: 0px 0px 0px 0px;
   }
   .icon.critical {
     color: $red;
@@ -250,18 +268,24 @@ $transparent: transparent;
 }
 
 .date {
-    padding: 0px 6px 0px 0px;
+  margin: 0px 4px 0px 0px;
+  .icon {
+    color: $red_b;
+    font-size: 15px;
+    margin: 0px 4px 4px 4px;
+    padding: 0px 0px 0px 0px;
+  }
 }
 
 .time {
-    padding: 0px 10px 0px 12px;
+    padding: 0px 10px 0px 10px;
     /* margin: 6px 4px 6px 0px; */
     margin: 0px;
     .text {
       font-weight: bold;
       color: $foreground;
     }
-    background-color: $background;
+    background-color: $background-light;
     border-radius: 12px;
 }
 

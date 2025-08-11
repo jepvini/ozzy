@@ -9,28 +9,29 @@ elif [ "$(governor-checker)" = "ac" ]; then
   FREQ="120Hz"
 fi
 
+# if echo "$OUT"| jq -r '.[].name' | grep -q HDMI-A-2; then
+#
+#   i=0
+#   while [ "$(echo "$OUT" | jq -r ".[$i].name")" != "HDMI-A-2" ]; do
+#     i=$(( "$i" + 1 ))
+#   done
+#
+#   HEIGHT="$(echo "$OUT" | jq -r ".[$i].modes[0].height")"
+#   WIDTH=$(echo "$OUT" | jq -r ".[$i].modes[0].width")
+#   RES="$WIDTH"
+#   RES+="x"
+#   RES+="$HEIGHT"
+#   swaymsg "output eDP-1 pos $(( (WIDTH - 1920) / 2 )) $HEIGHT res 2880x1920@$FREQ bg $WALL fill"
+#   swaymsg "output HDMI-A-2 pos 0 0 res $RES bg $WALL fill"
+# else
+# echo "hello"
+# fi
 
-if echo "$OUT"| jq -r '.[].name' | grep -q HDMI-A-2; then
-
-  i=0
-  while [ "$(echo "$OUT" | jq -r ".[$i].name")" != "HDMI-A-2" ]; do
-    i=$(( "$i" + 1 ))
-  done
-
-  HEIGHT="$(echo "$OUT" | jq -r ".[$i].modes[0].height")"
-  WIDTH=$(echo "$OUT" | jq -r ".[$i].modes[0].width")
-  RES="$WIDTH"
-  RES+="x"
-  RES+="$HEIGHT"
-  swaymsg "output eDP-1 pos $(( (WIDTH - 1920) / 2 )) $HEIGHT res 2880x1920@$FREQ bg $WALL fill"
-  swaymsg "output HDMI-A-2 pos 0 0 res $RES bg $WALL fill"
-else
-  swaymsg "output eDP-1 pos 0 0 res 2880x1920@$FREQ bg $WALL fill"
-fi
+swaymsg "output eDP-1 pos 0 0 res 2880x1920@$FREQ bg $WALL fill"
 
 # reload sway
-swaymsg "reload"
-sleep 0.1
+# swaymsg "reload"
+# sleep 0.1
 
 # reload eww
 pkill eww; eww daemon

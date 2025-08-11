@@ -9,9 +9,9 @@ default_floating_border pixel 4
 
 # for_window [title="^.*"] title_format ""
 # for_window [class="^.*"] border pixel 1, title_format ""
-for_window [window_type="dialog"] floating enable
-for_window [window_role="dialog"] floating enable
-for_window [title="Extension:*"] floating enable
+# for_window [window_type="dialog"] floating enable
+# for_window [window_role="dialog"] floating enable
+# for_window [title="Extension:*"] floating enable
 for_window [shell="xwayland"] title_format "[XWayland] %title"
 # gaps
 
@@ -36,14 +36,14 @@ client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
 client.background        $base
 
 
-# set
-set $main #af5fd7
-# set $main #666666
-set $inactive #e6c984
-set $fg #e4e4e4
-set $bg #000000
-set $urgent #e82424
-set $transparent rgba(0,0,0,0)
+# # set
+# set $main #af5fd7
+# # set $main #666666
+# set $inactive #e6c984
+# set $fg #e4e4e4
+# set $bg #000000
+# set $urgent #e82424
+# set $transparent rgba(0,0,0,0)
 
 # # class                 border  backgr. text    indicator child_border
 # client.focused          $main     $main      $bg      $main     $main

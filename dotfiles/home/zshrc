@@ -73,7 +73,7 @@ alias tree='tree -a -I .git'
 # alias v="nvim"
 alias k="kubectl"
 alias open="xdg-open"
-alias rm="rm -i"
+# alias rm="rm -i"
 
 # git
 alias g="git"
