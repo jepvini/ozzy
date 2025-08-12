@@ -2,12 +2,12 @@
 /* sexy-rick */
 
 * {
-	background:                     #1e1e2e;
+	background:                     #1e1e2e66;
 	bordercolor:                    #b4befe;
 	separatorcolor:                 transparent;
 	normal-background:              transparent;
 	normal-foreground:              #a6e3a1;
-	selected-background:            #b4b3f3;
+	selected-background:            #b4b3f3aa;
 	selected-foreground:            #1e1e2e;
 	foreground:                     @normal-foreground;
 }

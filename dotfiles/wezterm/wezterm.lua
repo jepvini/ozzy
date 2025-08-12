@@ -81,7 +81,7 @@ config = {
   -- sets font
   font = wezterm.font_with_fallback({
     "ComicShannsMonoNerdFontMono",
-    -- "jepfont",
+    "jepfont",
   }),
 
   font_size = 14,
