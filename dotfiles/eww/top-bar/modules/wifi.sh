@@ -11,5 +11,5 @@ while true; do
 
   [[ $1 = --single ]] && exit
 
-  sleep 10
+  sleep 5
 done

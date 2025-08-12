@@ -3,16 +3,17 @@
 ; Variables
 
 (deflisten caffeine :initial " " "./top-bar/modules/inhibit-status.sh")
+(deflisten date_poll :initial "00/00" "./top-bar/modules/date.sh")
 (deflisten dunst :initial " " "./top-bar/modules/dunst-checker.sh")
 (deflisten governor :initial "error" "./top-bar/modules/governor-checker.sh")
-;; (deflisten run-cat :initial "󠀰" "./top-bar/runcat/runcat.sh")
 (deflisten run-cat :initial "" "./top-bar/runcat/cat")
 (deflisten speakers :initial '{ "volume": 0, "muted": "false" }' "./top-bar/modules/listen-volume.sh")
-(deflisten watt :initial "0 0" "./top-bar/modules/watt.sh")
+(deflisten temp :initial "0" "./top-bar/modules/temp")
+(deflisten time_poll :initial "00:00" "./top-bar/modules/time.sh")
+(deflisten watt :initial "0.00" "./top-bar/modules/watt")
 (deflisten wifi :initial "0" "./top-bar/modules/wifi.sh")
 (deflisten workspaces :initial '' "./top-bar/modules/sway-workspaces.py")
-(deflisten date_poll :initial "00/00" "./top-bar/modules/date.sh")
-(deflisten time_poll :initial "00:00" "./top-bar/modules/time.sh")
+;; (deflisten run-cat :initial "󠀰" "./top-bar/runcat/runcat.sh")
 (defvar eww "$HOME/.local/bin/eww -c $HOME/.config/eww")
 (defvar governor_rev false)
 (defvar music_rev false)
@@ -121,8 +122,8 @@
 (defwidget temp []
   (box :class "left temp"
     :space-evenly false
-    (label :class "icon ${ EWW_TEMPS.ACPITZ_TEMP1 > 75 ? 'critical' : '' }" :text "")
-    (label :class "text" :text "${ EWW_TEMPS.ACPITZ_TEMP1 }°C" :halign "center" :xalign 0.5 :justify "right")
+    (label :class "icon ${ temp > 75 ? 'critical' : '' }" :text "")
+    (label :class "text" :text "${temp}°C" :halign "center" :xalign 0.5 :justify "right")
 ))
 
 ; Cpu-Watt
