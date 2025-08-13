@@ -21,10 +21,14 @@ main(int argc, char *argv[])
 
   while (1) {
     temp_now = fopen("/sys/class/thermal/thermal_zone3/temp", "r");
-    if (temp_now == NULL) exit(1);
+    if (temp_now == NULL) {
+      puts("error opening the file");
+      exit(1);
+    }
 
     clean_buff(buff);
     fgets(buff, MAX_LENGTH, temp_now);
+    fclose(temp_now);
     temp = strtol(buff, NULL, 10);
 
     fflush(stdout);
