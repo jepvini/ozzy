@@ -118,7 +118,7 @@ $transparent: transparent;
     color: $background;
     border-radius: 20px;
     background-color: $green;
-    padding: 0px 8px 0px 8px;
+    padding: 2px 8px 0px 8px;
     margin: 6px 0px 6px 0px;
   }
 }
@@ -166,11 +166,32 @@ $transparent: transparent;
   }
 }
 
+.charge-limit {
+  .icon {
+    font-size: 14px;
+    padding: 0px;
+    margin: 0px;
+  }
+  .on {
+    color: $background;
+    padding: 0px 5px 0px 5px;
+    margin: 7px 0px 7px 8px;
+    border-radius: 20px;
+    background-color: $yellow;
+  .expand {
+    margin: 0px 0px 0px 4px;
+    padding: 2px 4px 0px 4px;
+    color: $background;
+    font-weight: bold;
+  }
+  }
+}
+
 .wifi {
   .icon {
     color: $red;
     font-size: 15px;
-    margin: 0px 6px 2px 12px;
+    margin: 0px 6px 2px 10px;
     padding: 0px 0px 0px 0px;
   }
   .icon.connected {
@@ -181,7 +202,6 @@ $transparent: transparent;
     padding: 2px 4px 0px 4px;
     background-color: $green;
     font-weight: bold;
-    
   }
   .text {
     color: $black;
@@ -290,7 +310,7 @@ $transparent: transparent;
 }
 
 .tray image {
-  margin: 0px 0px 2px 0px;
+  margin: 0px 0px 0px 0px;
   padding: 0px 0px 0px 6px;
   -gtk-icon-transform: scale(0.5);
 }

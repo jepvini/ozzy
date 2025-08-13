@@ -2,7 +2,8 @@
 
 ; Variables
 
-(deflisten caffeine :initial " " "./top-bar/modules/inhibit-status.sh")
+(deflisten caffeine :initial " " "./top-bar/modules/inhibit-checker.sh")
+(deflisten charge-limit :initial "100" "./top-bar/modules/charge-limit-checker.sh")
 (deflisten date_poll :initial "00/00" "./top-bar/modules/date.sh")
 (deflisten dunst :initial " " "./top-bar/modules/dunst-checker.sh")
 (deflisten governor :initial "error" "./top-bar/modules/governor-checker.sh")
@@ -12,13 +13,15 @@
 (deflisten time_poll :initial "00:00" "./top-bar/modules/time.sh")
 (deflisten watt :initial "0.00" "./top-bar/modules/watt")
 (deflisten wifi :initial "0" "./top-bar/modules/wifi.sh")
-(deflisten workspaces :initial '' "./top-bar/modules/sway-workspaces.py")
+(deflisten workspaces :initial '[{"name": "1", "monitor": "eDP-1", "focused": true, "visible": true, "class": "focused", "icon": "\ue950"}]' "./top-bar/modules/sway-workspaces.py")
 ;; (deflisten run-cat :initial "󠀰" "./top-bar/runcat/runcat.sh")
 (defvar eww "$HOME/.local/bin/eww -c $HOME/.config/eww")
 (defvar governor_rev false)
 (defvar music_rev false)
 (defvar speackers_rev false)
 (defvar wifi_rev false)
+(defvar charge-limit-rev false)
+(defvar charge-limit-value 100)
 
 ; Windows
 (defwindow eDP  :monitor 0
@@ -49,12 +52,13 @@
     (workspaces)
     (caffeine)
     (dunst)
+    (charge-limit)
   )
 )
 
 (defwidget left []
   (box :class "left_modules" :orientation "h" :space-evenly false :halign "end"
-    ;; (tray)
+    (tray)
     (wifi)
     (speakers)
     (run-cat)
@@ -182,3 +186,24 @@
   (box :class "right dunst" :space-evenly false
     (label :class "icon ${dunst == ""  ? 'on' : '' }" :text "${dunst}")
 ))
+
+; Charge limit checker
+(defwidget charge-limit []
+  (eventbox :onhover "${eww} update charge-limit-rev=true" :onhoverlost "${eww} update charge-limit-rev=false"
+    (box :class "right charge-limit" :vexpand "false" :hexpand "false" :space-evenly "false"
+    (box :class "${charge-limit < "${charge-limit-value}" ? 'on' : '' }" :vexpand "false" :hexpand "false" :space-evenly "false"
+      (label :class "icon " :text "${charge-limit < "${charge-limit-value}" ? '' : '' }")
+      (revealer :transition "slideleft" :reveal charge-limit-rev :duration "500ms"
+        (label :class "expand text" :text "${charge-limit < "${charge-limit-value}" ? "${charge-limit}" : '' }")
+      )
+  )
+)))
+
+;; (defwidget wifi []
+;;   (eventbox :onhover "${eww} update wifi_rev=true" :onhoverlost "${eww} update wifi_rev=false"
+;;     (box :class "left wifi" :vexpand "false" :hexpand "false" :space-evenly "false"
+;;       (revealer :transition "slideleft" :reveal wifi_rev :duration "500ms"
+;;         (label :class "expand text" :text "${wifi == 0 ? 'Disconnected' : wifi}")
+;;       )
+;;     (label :class "icon ${wifi == 0 ? 'disconnected' : 'connected'} " :text "${wifi == 0 ? '' : '' }")
+;; )))

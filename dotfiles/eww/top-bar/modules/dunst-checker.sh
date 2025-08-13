@@ -8,7 +8,7 @@ while true; do
   elif [ "$PAUSED" = "false" ]; then
     echo ""
   else
-    echo ""
+    echo "ERR"
   fi
 
   sleep 1
